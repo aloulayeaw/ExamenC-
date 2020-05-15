@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GESTION_EMPLOYEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Employe">
+    <Key>
+      <PropertyRef Name="ID_EMPLOYE" />
+    </Key>
+    <Property Name="ID_EMPLOYE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Matricule" Type="int" Nullable="false" />
+    <Property Name="Prenom" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="NbrEnfant" Type="int" Nullable="false" />
+    <Property Name="Anciennete" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Salaire_Base" Type="int" Nullable="false" />
+    <Property Name="Statut" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="PrimeS" Type="int" Nullable="false" />
+    <Property Name="Prime" Type="int" Nullable="false" />
+    <Property Name="Ipres" Type="int" Nullable="false" />
+    <Property Name="ID_SERVICE" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Service_Emp">
+    <Key>
+      <PropertyRef Name="ID_SERVICE" />
+    </Key>
+    <Property Name="ID_SERVICE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Libelle" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="NbrEmploye" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Employe_Service_Emp">
+    <End Role="Service_Emp" Type="Self.Service_Emp" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service_Emp">
+        <PropertyRef Name="ID_SERVICE" />
+      </Principal>
+      <Dependent Role="Employe">
+        <PropertyRef Name="ID_SERVICE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GESTION_EMPLOYEModelStoreContainer">
+    <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service_Emp" EntityType="Self.Service_Emp" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Employe_Service_Emp" Association="Self.FK_Employe_Service_Emp">
+      <End Role="Service_Emp" EntitySet="Service_Emp" />
+      <End Role="Employe" EntitySet="Employe" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

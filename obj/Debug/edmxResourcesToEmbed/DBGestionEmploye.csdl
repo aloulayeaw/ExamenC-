@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GESTION_EMPLOYEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Employe">
+    <Key>
+      <PropertyRef Name="ID_EMPLOYE" />
+    </Key>
+    <Property Name="ID_EMPLOYE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Matricule" Type="Int32" Nullable="false" />
+    <Property Name="Prenom" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NbrEnfant" Type="Int32" Nullable="false" />
+    <Property Name="Anciennete" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salaire_Base" Type="Int32" Nullable="false" />
+    <Property Name="Statut" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrimeS" Type="Int32" Nullable="false" />
+    <Property Name="Prime" Type="Int32" Nullable="false" />
+    <Property Name="Ipres" Type="Int32" Nullable="false" />
+    <Property Name="ID_SERVICE" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Service_Emp" Relationship="Self.FK_Employe_Service_Emp" FromRole="Employe" ToRole="Service_Emp" />
+  </EntityType>
+  <EntityType Name="Service_Emp">
+    <Key>
+      <PropertyRef Name="ID_SERVICE" />
+    </Key>
+    <Property Name="ID_SERVICE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Libelle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NbrEmploye" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employes" Relationship="Self.FK_Employe_Service_Emp" FromRole="Service_Emp" ToRole="Employe" />
+  </EntityType>
+  <Association Name="FK_Employe_Service_Emp">
+    <End Role="Service_Emp" Type="Self.Service_Emp" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service_Emp">
+        <PropertyRef Name="ID_SERVICE" />
+      </Principal>
+      <Dependent Role="Employe">
+        <PropertyRef Name="ID_SERVICE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbgestionemployeContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employes" EntityType="Self.Employe" />
+    <EntitySet Name="Service_Emp" EntityType="Self.Service_Emp" />
+    <AssociationSet Name="FK_Employe_Service_Emp" Association="Self.FK_Employe_Service_Emp">
+      <End Role="Service_Emp" EntitySet="Service_Emp" />
+      <End Role="Employe" EntitySet="Employes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

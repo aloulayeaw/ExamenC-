@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GESTION_EMPLOYEModelStoreContainer" CdmEntityContainer="dbgestionemployeContext">
+    <EntitySetMapping Name="Employes">
+      <EntityTypeMapping TypeName="GESTION_EMPLOYEModel.Employe">
+        <MappingFragment StoreEntitySet="Employe">
+          <ScalarProperty Name="ID_EMPLOYE" ColumnName="ID_EMPLOYE" />
+          <ScalarProperty Name="Matricule" ColumnName="Matricule" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="NbrEnfant" ColumnName="NbrEnfant" />
+          <ScalarProperty Name="Anciennete" ColumnName="Anciennete" />
+          <ScalarProperty Name="Salaire_Base" ColumnName="Salaire_Base" />
+          <ScalarProperty Name="Statut" ColumnName="Statut" />
+          <ScalarProperty Name="PrimeS" ColumnName="PrimeS" />
+          <ScalarProperty Name="Prime" ColumnName="Prime" />
+          <ScalarProperty Name="Ipres" ColumnName="Ipres" />
+          <ScalarProperty Name="ID_SERVICE" ColumnName="ID_SERVICE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Service_Emp">
+      <EntityTypeMapping TypeName="GESTION_EMPLOYEModel.Service_Emp">
+        <MappingFragment StoreEntitySet="Service_Emp">
+          <ScalarProperty Name="ID_SERVICE" ColumnName="ID_SERVICE" />
+          <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+          <ScalarProperty Name="NbrEmploye" ColumnName="NbrEmploye" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
